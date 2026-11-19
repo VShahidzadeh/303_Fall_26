@@ -66,6 +66,9 @@ def wiki_dl_and_save(topic):
     with open(f"{safe_filename(title)}.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(references))
 
+    print(f"Wrote {len(references)} references for '{title}'")
+
+
 def section_b():
     """Concurrently download and save references for each topic."""
     start = time.perf_counter()
@@ -81,5 +84,15 @@ def section_b():
     # 4. Print total elapsed time for ALL topics
     end = time.perf_counter()
     print(f"Section B (concurrent) finished in {end - start:.2f} seconds")
+
+
+def main():
+    section_a()
+    print()
+    section_b()
+
+
+if __name__ == "__main__":
+    main()
 
 
