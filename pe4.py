@@ -36,3 +36,6 @@ for topic in topics:
 
     print(f"Wrote {len(references)} references for '{title}'")
 
+    # 3. Print total elapsed time for ALL topics
+    end = time.perf_counter()
+    print(f"Section A (sequential) finished in {end - start:.2f} seconds")
