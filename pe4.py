@@ -66,5 +66,20 @@ def wiki_dl_and_save(topic):
     with open(f"{safe_filename(title)}.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(references))
 
-    print(f"Wrote {len(references)} references for '{title}'")
+def section_b():
+    """Concurrently download and save references for each topic."""
+    start = time.perf_counter()
+
+    # 1. Search for topics related to 'generative artificial intelligence'
+    topics = wikipedia.search("generative artificial intelligence")
+    print(f"Found {len(topics)} topics: {topics}")
+
+    # 3. Run wiki_dl_and_save for every topic using a thread pool
+    with ThreadPoolExecutor() as executor:
+        list(executor.map(wiki_dl_and_save, topics))
+
+    # 4. Print total elapsed time for ALL topics
+    end = time.perf_counter()
+    print(f"Section B (concurrent) finished in {end - start:.2f} seconds")
+
 
